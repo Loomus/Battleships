@@ -20,29 +20,32 @@ class ShipTest < Minitest::Test
   def test_it_has_health
     assert_equal 3, @cruiser.health
   end
+
+  def test_it_starts_as_not_sunk
+    assert_equal false, @cruiser.sunk?
+  end
+
+  def test_hit_method_decreases_health
+    @cruiser.hit
+    assert_equal 2, @cruiser.health
+  end
+
+  def test_hit_method_can_decrease_multiple_times
+    @cruiser.hit
+    @cruiser.hit
+    assert_equal 1, @cruiser.health
+  end
+
+  def test_if_cruiser_is_now_sunk
+    @cruiser.hit
+    @cruiser.hit
+    assert_equal false, @cruiser.sunk?
+  end
+
+  def test_if_cruiser_is_finally_sunk
+    @cruiser.hit
+    @cruiser.hit
+    @cruiser.hit
+    assert_equal true, @cruiser.sunk?
+  end
 end
-
-
-# pry(main)> cruiser.health
-# #=> 3
-#
-# pry(main)> cruiser.sunk?
-# #=> false
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.health
-# #=> 2
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.health
-# #=> 1
-#
-# pry(main)> cruiser.sunk?
-# #=> false
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.sunk?
-# #=> true
