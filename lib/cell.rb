@@ -40,7 +40,7 @@ class Cell
       "M"
     elsif empty? == false && fired_upon? == true
       "H"
-    elsif empty? == false && arg = true
+    elsif empty? == false && arg == true
       "S"
     else
       "."

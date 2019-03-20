@@ -82,26 +82,15 @@ class CellTest < Minitest::Test
     @cell_2.place_ship(@cruiser_2)
     assert_equal "S", @cell_2.render(true)
   end
-end
 
-# # Indicate that we want to show a ship with the optional argument
-# pry(main)> cell_2.render(true)
-# # => "S"
-#
-# pry(main)> cell_2.fire_upon
-#
-# pry(main)> cell_2.render
-# # => "H"
-#
-# pry(main)> cruiser.sunk?
-# # => false
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.sunk?
-# # => true
-#
-# pry(main)> cell_2.render
-# # => "X"
+  def test_cell_and_ship_methods_interacting_correctly
+    @cell_2.place_ship(@cruiser_2)
+    @cell_2.fire_upon
+    assert_equal "H", @cell_2.render
+    assert_equal false, @cruiser_2.sunk?
+    @cruiser_2.hit
+    @cruiser_2.hit
+    assert_equal true, @cruiser_2.sunk?
+    assert_equal "X", @cell_2.render
+  end
+end
