@@ -25,7 +25,25 @@ class Cell
   end
 
   def fire_upon
-    ship.hit
-    @fired_upon = true 
+    if empty?
+      @fired_upon = true
+    else
+      @fired_upon = true
+      @ship.hit
+    end
+  end
+
+  def render(arg=true)
+    if empty? == false && ship.sunk? == true
+      "X"
+    elsif empty? == true && fired_upon?
+      "M"
+    elsif empty? == false && fired_upon? == true
+      "H"
+    elsif empty? == false && arg = true
+      "S"
+    else
+      "."
+    end
   end
 end
