@@ -17,4 +17,12 @@ class BoardTest < Minitest::Test
   def test_how_keys_are_in_cell_hash
     assert_equal 16, @board.cells.keys.count
   end
+
+  def test_if_vaildates_cordinates
+    assert_equal true, @board.vaild_coordinate?("A1")
+    assert_equal true, @board.vaild_coordinate?("D4")
+    assert_equal false, @board.vaild_coordinate?("A5")
+    assert_equal false, @board.vaild_coordinate?("E1")
+    assert_equal false, @board.vaild_coordinate?("A22")
+  end
 end
