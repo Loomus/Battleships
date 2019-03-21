@@ -29,14 +29,14 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_coordinates_are_same_length_as_ship
-    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
-    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
+    assert_equal false, @board.length_equals_coord(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.length_equals_coord(@submarine, ["A2", "A3", "A4"])
   end
 
   def test_are_coordinates_consecutive
-    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
-    assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
-    assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
-    assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
-  end 
+    assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.consecutive_coord(@submarine, ["A1", "C1"])
+    assert_equal false, @board.consecutive_coord(@cruiser, ["A3", "A2", "A1"])
+    assert_equal false, @board.consecutive_coord(@submarine, ["C1", "B1"])
+  end
 end

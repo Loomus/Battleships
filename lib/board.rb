@@ -26,10 +26,11 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  def valid_placement?(ship, coordinate)
-    @cells.each_cons(4) do |cell|
-      cell.coordinate
-    end 
-    # ship.length == coordinate.count
+  def length_equals_coord(ship, coordinate)
+    ship.length == coordinate.count
+  end
+
+  def consecutive_coord(ship, coordinate)
+    @cells.
   end
 end
