@@ -22,7 +22,7 @@ class Board
     }
   end
 
-  def vaild_coordinate?(coordinate)
+  def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
   end
 
@@ -33,4 +33,5 @@ class Board
   def consecutive_coord(ship, coordinate)
     @cells.
   end
+
 end
