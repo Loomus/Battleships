@@ -26,17 +26,21 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
-
+  end
 
   def test_if_coordinates_are_same_length_as_ship
     assert_equal false, @board.length_equals_coord(@cruiser, ["A1", "A2"])
     assert_equal false, @board.length_equals_coord(@submarine, ["A2", "A3", "A4"])
   end
 
-  def test_are_coordinates_consecutive
-    assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])
-    assert_equal false, @board.consecutive_coord(@submarine, ["A1", "C1"])
-    assert_equal false, @board.consecutive_coord(@cruiser, ["A3", "A2", "A1"])
-    assert_equal false, @board.consecutive_coord(@submarine, ["C1", "B1"])
+  def test_if_we_can_split_cells_letters_and_numbers
+    assert_equal ["A", "1"], @board.split_cells("A1")
   end
+
+  # def test_are_coordinates_consecutive
+  #   assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])
+  #   assert_equal false, @board.consecutive_coord(@submarine, ["A1", "C1"])
+  #   assert_equal false, @board.consecutive_coord(@cruiser, ["A3", "A2", "A1"])
+  #   assert_equal false, @board.consecutive_coord(@submarine, ["C1", "B1"])
+  # end
 end
