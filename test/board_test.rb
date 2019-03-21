@@ -31,6 +31,7 @@ class BoardTest < Minitest::Test
   def test_if_coordinates_are_same_length_as_ship
     assert_equal false, @board.length_equals_coord(@cruiser, ["A1", "A2"])
     assert_equal false, @board.length_equals_coord(@submarine, ["A2", "A3", "A4"])
+    require 'pry'; binding.pry
   end
 
   def test_if_we_can_split_cells_letters_and_numbers
