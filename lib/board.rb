@@ -25,4 +25,13 @@ class Board
   def valid_coordinate?(coordinate)
     @cells.keys.include?(coordinate)
   end
+
+  def length_equals_coord(ship, coordinate)
+    ship.length == coordinate.count
+  end
+
+  def consecutive_coord(ship, coordinate)
+    @cells.
+  end
+
 end
