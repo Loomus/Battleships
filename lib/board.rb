@@ -30,8 +30,18 @@ class Board
     ship.length == coordinate.count
   end
 
-  def consecutive_coord(ship, coordinate)
-    @cells.
+  def split_cells(coordinate)
+
+    each_cell_array = @cells.keys.each_cons(2) { |key| key ==  }
+    # each_cell_array.map do |cell|
+    #   cell.to_s.split()
+    # end
   end
 
+  # def consecutive_coord(ship, coordinate)
+  #   letters_arr = []
+  #   @cells.keys.map do |letter|
+  #     letter.ord == 65 || 66 || 67 || 68
+  #   end
+  # end
 end
