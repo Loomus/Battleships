@@ -42,6 +42,10 @@ class BoardTest < Minitest::Test
     assert_equal [1,2], @board.x_coords(@cruiser, ["A1", "A2"])
   end
 
+  def test_y_coords_are_letters
+    assert_equal ["A", "A"], @board.y_coords(@cruiser, ["A1", "A2"])
+  end 
+
   # def test_are_coordinates_consecutive
   #   assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])
   #   assert_equal false, @board.consecutive_coord(@submarine, ["A1", "C1"])

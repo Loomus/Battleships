@@ -46,4 +46,12 @@ class Board
     end
     int
   end
+
+  def y_coords(ship, coordinate)
+    split_coords = coordinates_split(ship, coordinate)
+    abcd = split_coords.reject do |coord|
+      ["1", "2", "3", "4"].include?(coord)
+    end
+    abcd
+  end
 end
