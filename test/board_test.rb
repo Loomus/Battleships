@@ -38,6 +38,7 @@ class BoardTest < Minitest::Test
     assert_equal ["B", "3", "B", "4"], @board.coordinates_split(@submarine, ["B3", "B4"])
   end
 
+<<<<<<< Updated upstream
   def test_x_coords_are_integers
     assert_equal [1,2,3], @board.x_coords(@cruiser, ["A1", "A2", "A3"])
     assert_equal [1,2], @board.x_coords(@submarine, ["B1", "B2"])
@@ -70,5 +71,17 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
     assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
     assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
+=======
+  def test_if_vaildate_letter_in_coord_method_works
+    assert_equal true, @board.validate_letter_in_coord?
+  end
+  
+  def test_are_coordinates_consecutive
+    skip
+    assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.consecutive_coord(@submarine, ["A1", "C1"])
+    assert_equal false, @board.consecutive_coord(@cruiser, ["A3", "A2", "A1"])
+    assert_equal false, @board.consecutive_coord(@submarine, ["C1", "B1"])
+>>>>>>> Stashed changes
   end
 end
