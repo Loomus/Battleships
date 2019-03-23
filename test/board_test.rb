@@ -10,6 +10,9 @@ class BoardTest < Minitest::Test
     @submarine = Ship.new("Submarine", 2)
     @cruiser = Ship.new("Cruiser", 3)
     @board = Board.new
+    @cell_1 = @board.cells["A1"]
+    @cell_2 = @board.cells["A2"]
+    @cell_3 = @board.cells["A3"]
   end
 
   def test_board_exists
@@ -83,4 +86,11 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.diagonal_coords?(@submarine, ["C2", "D3"])
   end
 
+  def test_if_ship_can_be_placed
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @cell_1.ship
+    @cell_2.ship
+    @cell_3.ship
+    assert_equal true, @cell_3.ship == @cell_2.ship
+  end
 end
