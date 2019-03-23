@@ -95,4 +95,10 @@ class Board
     diag_c = diagonal_coords?(ship, coordinate)
     length && valid_c && diag_c
   end
+
+  def place(ship, coordinate)
+    coordinate.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
+    end
+  end
 end
