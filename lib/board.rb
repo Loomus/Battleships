@@ -23,7 +23,13 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @cells.keys.include?(coordinate)
+    @cells.key?(coordinate)
+  end
+
+  def valid_coordinates?(coordinates_array)
+    coordinates_array.all? do |coordinate|
+      valid_coordinate?(coordinate)
+    end
   end
 
   def length_equals_coord(ship, coordinate)
@@ -73,11 +79,20 @@ class Board
   def consecutive_y_coords?(ship, coordinate)
     abc = y_ordinal_values(ship, coordinate)
     abc.each_cons(2).all? do |a, b|
-      b.ord == a.ord
+      b == a + 1
     end
   end
 
+  def diagonal_coords?(ship, coordinate)
+    cons_x = consecutive_x_coords?(ship, coordinate)
+    cons_y = consecutive_y_coords?(ship, coordinate)
+    (cons_x ^ cons_y)
+  end
+
   def valid_placement?(ship, coordinate)
-    valid_coordinate?(coordinate) && length_equals_coord(ship, coordinate) && coordinates_split(ship, coordinate) && x_coords(ship, coordinate) && y_coords(ship, coordinate) && consecutive_x_coords?(ship, coordinate) && y_ordinal_values(ship, coordinate) && consecutive_y_coords(ship, coordinate)
+    length = length_equals_coord(ship, coordinate)
+    valid_c = valid_coordinates?(coordinate)
+    diag_c = diagonal_coords?(ship, coordinate)
+    length && valid_c && diag_c
   end
 end
