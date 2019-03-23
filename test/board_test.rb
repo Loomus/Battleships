@@ -10,7 +10,6 @@ class BoardTest < Minitest::Test
     @submarine = Ship.new("Submarine", 2)
     @cruiser = Ship.new("Cruiser", 3)
     @board = Board.new
-    # require 'pry'; binding.pry
   end
 
   def test_board_exists
@@ -44,7 +43,17 @@ class BoardTest < Minitest::Test
 
   def test_y_coords_are_letters
     assert_equal ["A", "A"], @board.y_coords(@cruiser, ["A1", "A2"])
-  end 
+  end
+
+  def test_consecutive_x_coords
+    assert_equal true, @board.consecutive_x_coords?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.consecutive_x_coords?(@cruiser, ["A1", "A3"])
+  end
+
+  def test_consecutive_y_cords
+    assert_equal true, @board.consecutive_y_coords?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.consecutive_y_coords?(@cruiser, ["A1", "C1"])
+  end
 
   # def test_are_coordinates_consecutive
   #   assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])

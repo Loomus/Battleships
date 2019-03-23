@@ -54,4 +54,18 @@ class Board
     end
     abcd
   end
+
+  def consecutive_x_coords?(ship, coordinate)
+    int_array = x_coords(ship, coordinate)
+    int_array.each_cons(2).all? do |int_1, int_2|
+      int_2 == int_1 + 1
+    end
+  end
+
+  def consecutive_y_coords?(ship, coordinate)
+    letter_array = y_coords(ship, coordinate)
+    letter_array.each_cons(2).all? do |a, b|
+      a.ord <=> b.ord
+    end
+  end
 end
