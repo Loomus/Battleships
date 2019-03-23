@@ -62,10 +62,22 @@ class Board
     end
   end
 
-  def consecutive_y_coords?(ship, coordinate)
-    letter_array = y_coords(ship, coordinate)
-    letter_array.each_cons(2).all? do |a, b|
-      a.ord <=> b.ord
+  def y_ordinal_values(ship, coordinate)
+    ord = y_coords(ship, coordinate)
+    values = ord.map do |a|
+      a.ord
     end
+    values
+  end
+
+  def consecutive_y_coords?(ship, coordinate)
+    abc = y_ordinal_values(ship, coordinate)
+    abc.each_cons(2).all? do |a, b|
+      b.ord == a.ord
+    end
+  end
+
+  def valid_placement?(ship, coordinate)
+    valid_coordinate?(coordinate) && length_equals_coord(ship, coordinate) && coordinates_split(ship, coordinate) && x_coords(ship, coordinate) && y_coords(ship, coordinate) && consecutive_x_coords?(ship, coordinate) && y_ordinal_values(ship, coordinate) && consecutive_y_coords(ship, coordinate)
   end
 end
