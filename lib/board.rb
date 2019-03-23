@@ -30,18 +30,54 @@ class Board
     ship.length == coordinate.count
   end
 
-  def split_cells(coordinate)
-
-    each_cell_array = @cells.keys.each_cons(2) { |key| key ==  }
-    # each_cell_array.map do |cell|
-    #   cell.to_s.split()
-    # end
+  def coordinates_split(ship, coordinate)
+    coords_split = coordinate.flat_map do |coord|
+      coord.split('').to_a
+    end
   end
 
-  # def consecutive_coord(ship, coordinate)
-  #   letters_arr = []
-  #   @cells.keys.map do |letter|
-  #     letter.ord == 65 || 66 || 67 || 68
-  #   end
-  # end
+  def x_coords(ship, coordinate)
+    split_coords = coordinates_split(ship, coordinate)
+    nums = split_coords.reject do |coord|
+      ["A", "B", "C", "D"].include?(coord)
+    end
+    int = nums.map do |num|
+      num.to_i
+    end
+    int
+  end
+
+  def y_coords(ship, coordinate)
+    split_coords = coordinates_split(ship, coordinate)
+    abcd = split_coords.reject do |coord|
+      ["1", "2", "3", "4"].include?(coord)
+    end
+    abcd
+  end
+
+  def consecutive_x_coords?(ship, coordinate)
+    int_array = x_coords(ship, coordinate)
+    int_array.each_cons(2).all? do |int_1, int_2|
+      int_2 == int_1 + 1
+    end
+  end
+
+  def y_ordinal_values(ship, coordinate)
+    ord = y_coords(ship, coordinate)
+    values = ord.map do |a|
+      a.ord
+    end
+    values
+  end
+
+  def consecutive_y_coords?(ship, coordinate)
+    abc = y_ordinal_values(ship, coordinate)
+    abc.each_cons(2).all? do |a, b|
+      b.ord == a.ord
+    end
+  end
+
+  def valid_placement?(ship, coordinate)
+    valid_coordinate?(coordinate) && length_equals_coord(ship, coordinate) && coordinates_split(ship, coordinate) && x_coords(ship, coordinate) && y_coords(ship, coordinate) && consecutive_x_coords?(ship, coordinate) && y_ordinal_values(ship, coordinate) && consecutive_y_coords(ship, coordinate)
+  end
 end
