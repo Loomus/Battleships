@@ -93,12 +93,19 @@ class Board
     length = length_equals_coord(ship, coordinate)
     valid_c = valid_coordinates?(coordinate)
     diag_c = diagonal_coords?(ship, coordinate)
+    overlap = overlapping_ships?(ship, coordinate)
     length && valid_c && diag_c
   end
 
   def place(ship, coordinate)
     coordinate.each do |coordinate|
       @cells[coordinate].place_ship(ship)
+    end
+  end
+
+  def overlapping_ships?(ship, coordinate)
+    coordinate.any? do |coordinate|
+      @cells[coordinate].empty?
     end
   end
 end
