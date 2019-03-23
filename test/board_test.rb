@@ -36,11 +36,11 @@ class BoardTest < Minitest::Test
 
   def test_coordinates_can_be_split
     assert_equal ["A", "1", "A", "2"], @board.coordinates_split(@cruiser, ["A1", "A2"])
-  end 
-  #
-  # def test_if_vertical_ranges_are_correct
-  #   assert_equal true, @board.vertical_coords
-  # end
+  end
+
+  def test_x_coords_are_integers
+    assert_equal [1,2], @board.x_coords(@cruiser, ["A1", "A2"])
+  end
 
   # def test_are_coordinates_consecutive
   #   assert_equal false, @board.consecutive_coord(@cruiser, ["A1", "A2", "A4"])

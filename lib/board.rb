@@ -20,8 +20,6 @@ class Board
      "D3" => Cell.new("D3"),
      "D4" => Cell.new("D4")
     }
-    # @horizontal = [1..4]
-    # @vertical = ['A'..'D']
   end
 
   def valid_coordinate?(coordinate)
@@ -38,9 +36,14 @@ class Board
     end
   end
 
-  def consecutive_coord(ship, coordinate)
-    # @cells.keys.each_cons(2) do |coordinate|
-    #   coordinate[0] <=> coordinate[1]
-    # end
+  def x_coords(ship, coordinate)
+    split_coords = coordinates_split(ship, coordinate)
+    nums = split_coords.reject do |coord|
+      ["A", "B", "C", "D"].include?(coord)
+    end
+    int = nums.map do |num|
+      num.to_i
+    end
+    int
   end
 end
