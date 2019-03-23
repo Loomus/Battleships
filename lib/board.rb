@@ -20,6 +20,8 @@ class Board
      "D3" => Cell.new("D3"),
      "D4" => Cell.new("D4")
     }
+    # @horizontal = [1..4]
+    # @vertical = ['A'..'D']
   end
 
   def valid_coordinate?(coordinate)
@@ -30,18 +32,15 @@ class Board
     ship.length == coordinate.count
   end
 
-  def split_cells(coordinate)
-
-    each_cell_array = @cells.keys.each_cons(2) { |key| key ==  }
-    # each_cell_array.map do |cell|
-    #   cell.to_s.split()
-    # end
+  def coordinates_split(ship, coordinate)
+    coords_split = coordinate.flat_map do |coord|
+      coord.split('').to_a
+    end
   end
 
-  # def consecutive_coord(ship, coordinate)
-  #   letters_arr = []
-  #   @cells.keys.map do |letter|
-  #     letter.ord == 65 || 66 || 67 || 68
-  #   end
-  # end
+  def consecutive_coord(ship, coordinate)
+    # @cells.keys.each_cons(2) do |coordinate|
+    #   coordinate[0] <=> coordinate[1]
+    # end
+  end
 end
