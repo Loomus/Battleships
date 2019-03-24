@@ -101,4 +101,18 @@ class Board
       @cells[coordinate].place_ship(ship)
     end
   end
+
+  def rows_created
+    @cells.keys.each_slice(4).to_a
+    letters = y_coords(ship, coordinate)
+  end
+  def render(arg=true)
+    # needs to show the cell's status when rendering the board for all cells now
+    # require 'pry'; binding.pry
+
+    # coords = @cells.keys
+    # coords.each do |cell|
+    #   p cell
+    # end
+  end
 end
