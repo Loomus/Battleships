@@ -104,15 +104,17 @@ class Board
 
   def rows_created
     @cells.keys.each_slice(4).to_a
-    letters = y_coords(ship, coordinate)
   end
-  def render(arg=true)
-    # needs to show the cell's status when rendering the board for all cells now
-    # require 'pry'; binding.pry
 
-    # coords = @cells.keys
-    # coords.each do |cell|
-    #   p cell
-    # end
+  def columns_created
+    rows_created.transpose
+  end
+
+  def render(arg=true)
+    # utilize rows and columns created to render board by map iterating over them
+    # with index and joining the strings at the end of method. I think...
+    rows_created.map.with_index do |rows_created, index|
+      require 'pry'; binding.pry
+    end
   end
 end
