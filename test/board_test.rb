@@ -118,14 +118,14 @@ class BoardTest < Minitest::Test
                " D . . . . \n"
     assert_equal expected, @board.render
   end
-  #
-  # def test_rendered_board_updates_after_ship_placed
-  #   @board.place(@cruiser, ["A1", "A2", "A3"])
-  #   expected = "  1 2 3 4 \n" +
-  #              " A . . . . \n" +
-  #              " B . . . . \n" +
-  #              " C . . . . \n" +
-  #              " D . . . . \n"
-  #   assert_equal expected, @board.render(true)
-  # end
+
+  def test_rendered_board_updates_after_ship_placed
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expected = "  1 2 3 4 \n" +
+               " A S S S . \n" +
+               " B . . . . \n" +
+               " C . . . . \n" +
+               " D . . . . \n"
+    assert_equal expected, @board.render(true)
+  end
 end
