@@ -103,9 +103,25 @@ class Board
     end
   end
 
+
   def overlapping_ships?(ship, coordinate)
     coordinate.any? do |coordinate|
       @cells[coordinate].empty?
+
+  def rows_created
+    @cells.keys.each_slice(4).to_a
+  end
+
+  def columns_created
+    rows_created.transpose
+  end
+
+  def render(arg=true)
+    # utilize rows and columns created to render board by map iterating over them
+    # with index and joining the strings at the end of method. I think...
+    rows_created.map.with_index do |rows_created, index|
+      require 'pry'; binding.pry
+
     end
   end
 end
