@@ -93,6 +93,7 @@ class Board
     length = length_equals_coord(ship, coordinate)
     valid_c = valid_coordinates?(coordinate)
     diag_c = diagonal_coords?(ship, coordinate)
+    overlap = overlapping_ships?(ship, coordinate)
     length && valid_c && diag_c
   end
 
@@ -101,6 +102,11 @@ class Board
       @cells[coordinate].place_ship(ship)
     end
   end
+
+
+  def overlapping_ships?(ship, coordinate)
+    coordinate.any? do |coordinate|
+      @cells[coordinate].empty?
 
   def rows_created
     @cells.keys.each_slice(4).to_a
@@ -115,6 +121,7 @@ class Board
     # with index and joining the strings at the end of method. I think...
     rows_created.map.with_index do |rows_created, index|
       require 'pry'; binding.pry
+
     end
   end
 end
