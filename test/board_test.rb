@@ -94,6 +94,12 @@ class BoardTest < Minitest::Test
     assert_equal true, @cell_3.ship == @cell_2.ship
   end
 
+
+  def test_ships_cannot_overlap
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal true, @board.overlapping_ships?(@submarine, ["A1", "B1"])
+  end
+
   def test_it_creates_rows
     expected = [["A1", "A2", "A3", "A4"],
                 ["B1", "B2", "B3", "B4"],
@@ -118,14 +124,14 @@ class BoardTest < Minitest::Test
                " D . . . . \n"
     assert_equal expected, @board.render
   end
-  #
-  # def test_rendered_board_updates_after_ship_placed
-  #   @board.place(@cruiser, ["A1", "A2", "A3"])
-  #   expected = "  1 2 3 4 \n" +
-  #              " A . . . . \n" +
-  #              " B . . . . \n" +
-  #              " C . . . . \n" +
-  #              " D . . . . \n"
-  #   assert_equal expected, @board.render(true)
-  # end
+
+  def test_rendered_board_updates_after_ship_placed
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    expected = "  1 2 3 4 \n" +
+               " A S S S . \n" +
+               " B . . . . \n" +
+               " C . . . . \n" +
+               " D . . . . \n"
+    assert_equal expected, @board.render(true)
+  end
 end

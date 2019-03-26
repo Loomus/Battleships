@@ -93,6 +93,7 @@ class Board
     length = length_equals_coord(ship, coordinate)
     valid_c = valid_coordinates?(coordinate)
     diag_c = diagonal_coords?(ship, coordinate)
+    overlap = overlapping_ships?(ship, coordinate)
     length && valid_c && diag_c
   end
 
@@ -102,6 +103,13 @@ class Board
     end
   end
 
+
+  def overlapping_ships?(ship, coordinate)
+    coordinate.any? do |coordinate|
+      @cells[coordinate].empty?
+    end
+  end 
+
   def rows_created
     @cells.keys.each_slice(4).to_a
   end
@@ -110,11 +118,20 @@ class Board
     rows_created.transpose
   end
 
-  def render(arg=true)
-    # utilize rows and columns created to render board by map iterating over them
-    # with index and joining the strings at the end of method. I think...
-    rows_created.map.with_index do |rows_created, index|
-      require 'pry'; binding.pry
+  def render(arg = true)
+    if arg == false
+      board = "  1 2 3 4 \n" +
+    " A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
+    " B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" +
+    " C #{@cells["C1"].render} #{@cells["C2"].render} #{@cells["C3"].render} #{@cells["C4"].render} \n" +
+    " D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render} \n"
+    else arg == true
+      board = "  1 2 3 4 \n" +
+    " A #{@cells["A1"].render(true)} #{@cells["A2"].render(true)} #{@cells["A3"].render(true)} #{@cells["A4"].render(true)} \n" +
+    " B #{@cells["B1"].render(true)} #{@cells["B2"].render(true)} #{@cells["B3"].render(true)} #{@cells["B4"].render(true)} \n" +
+    " C #{@cells["C1"].render(true)} #{@cells["C2"].render(true)} #{@cells["C3"].render(true)} #{@cells["C4"].render(true)} \n" +
+    " D #{@cells["D1"].render(true)} #{@cells["D2"].render(true)} #{@cells["D3"].render(true)} #{@cells["D4"].render(true)} \n"
     end
+    board
   end
 end
