@@ -20,6 +20,7 @@ class Board
      "D3" => Cell.new("D3"),
      "D4" => Cell.new("D4")
     }
+    @width = 4
   end
 
   def valid_coordinate?(coordinate)
@@ -97,8 +98,8 @@ class Board
     length && valid_c && diag_c
   end
 
-  def place(ship, coordinate)
-    coordinate.each do |coordinate|
+  def place(ship, coordinates)
+    coordinates.each do |coordinate|
       @cells[coordinate].place_ship(ship)
     end
   end
@@ -108,7 +109,7 @@ class Board
     coordinate.any? do |coordinate|
       @cells[coordinate].empty?
     end
-  end 
+  end
 
   def rows_created
     @cells.keys.each_slice(4).to_a
