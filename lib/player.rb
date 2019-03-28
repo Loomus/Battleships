@@ -1,49 +1,53 @@
-class Player
-  attr_reader :player_board
+require_relative './board'
+require_relative './ship'
+require_relative './cell'
+require_relative './computer'
 
-  def initialize(player_board)
-    @player_board = Board.new
+class Player
+  attr_reader :player_board, :computer_board
+
+  def initialize(player_board, computer_board)
+    @player_board = player_board
     @computer_board = computer_board
-    @margot = Ship.new("Margot", 2)
-    @sheila = Ship.new("Sheila", 3)
+    @margot = Ship.new("Margot", 3)
+    @sheila = Ship.new("Sheila", 2)
     @shots = []
   end
 
   def show_board
     " * PLAYER BOARD * \n" +
-    @player_board.render(true)
+    @player_board.render
   end
 
-  def place_ships(ship, coordinate)
-    "I have laid out my ships on the grid.\n" +
-    "You now need to lay out your two ships.\n" +
-    "Margot, our cruiser, is 2 units long and Sheila, our steely submarine, is 3 units long.\n" +
-    "  1 2 3 4\n" +
-    "A . . . .\n" +
-    "B . . . .\n" +
-    "C . . . .\n" +
-    "D . . . .\n" +
-    "Enter the squares for Margot (3 spaces):\n" +
-    "> "
-    coords = gets.chomp.upcase.to_a
-    until @player_board.valid_placement?(@margot, coords) == true
-      "Those are invalid coordinates. Please try again:\n" +
-      "> "
-      coords = gets.chomp.upcase.to_a
+  def place_ships
+    puts "I have laid out my ships on the grid.\n"
+    puts "You now need to lay out your two ships.\n"
+    puts "Margot, our cruiser, is 2 units long and Sheila, our steely submarine, is 3 units long.\n"
+    puts "  1 2 3 4\n"
+    puts "A . . . .\n"
+    puts "B . . . .\n"
+    puts "C . . . .\n"
+    puts "D . . . .\n"
+    puts "Enter the squares for Margot (3 spaces):\n"
+    puts "> "
+    coordinate = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@margot, coordinate) == true
+      puts "Those are invalid coordinates. Please try again:\n"
+      puts "> "
+      coordinate = gets.chomp.upcase.split
     end
-      @player_board.place(@margot, coords)
-    @player_board.render
-    "Enter the squares for Sheila (3 spaces)\n" +
-    "> "
-    coords_2 = gets.chomp.upcase.to_a
-    until @player_board.valid_placement?(@sheila, coords_2) == true
-      "Those are invalid coordinates. Please try again:\n" +
-      "> "
-      coords_2 = gets.chomp.upcase.to_a
+      @player_board.place(@margot, coordinate)
+    puts "Enter the squares for Sheila (2 spaces)\n"
+    puts "> "
+    coordinate = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@sheila, coordinate) == true
+      puts "Those are invalid coordinates. Please try again:\n"
+      puts "> "
+      coordinate = gets.chomp.upcase.split
     end
-      @player_board.place(@sheila, coords_2)
+      @player_board.place(@sheila, coordinate)
+      @player_board.render(true)
     end
-    @player_board.render
   end
 
   def bombs_away
