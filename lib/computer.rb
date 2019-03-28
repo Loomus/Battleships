@@ -32,7 +32,7 @@ class Computer
     split_cell = empty_cell.split('').to_a
     coordinates = build_row(split_cell[0], split_cell[1].to_i, split_cell[1].to_i + ship.length) &&
      build_column(split_cell[1], split_cell[0].ord, split_cell[0].ord + ship.length)
-    if @computer_board.valid_coordinates?(coordinates)
+    if @computer_board.valid_placement?(ship, coordinates)
       @computer_board.place(ship, coordinates)
     end
   end

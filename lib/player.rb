@@ -16,40 +16,37 @@ class Player
 
   def show_board
     " * PLAYER BOARD * \n" +
-    @player_board.render(true)
+    @player_board.render
   end
 
-  def place_ships(ship, coords)
-    "I have laid out my ships on the grid.\n" +
-    "You now need to lay out your two ships.\n" +
-    "Margot, our cruiser, is 2 units long and Sheila, our steely submarine, is 3 units long.\n" +
-    "  1 2 3 4\n" +
-    "A . . . .\n" +
-    "B . . . .\n" +
-    "C . . . .\n" +
-    "D . . . .\n" +
-    "Enter the squares for Margot (3 spaces):\n" +
-    "> "
+  def place_ships
+    puts "I have laid out my ships on the grid.\n"
+    puts "You now need to lay out your two ships.\n"
+    puts "Margot, our cruiser, is 2 units long and Sheila, our steely submarine, is 3 units long.\n"
+    puts "  1 2 3 4\n"
+    puts "A . . . .\n"
+    puts "B . . . .\n"
+    puts "C . . . .\n"
+    puts "D . . . .\n"
+    puts "Enter the squares for Margot (3 spaces):\n"
+    puts "> "
     coords = gets.chomp.upcase
     until @player_board.valid_placement?(@margot, coords) == true
-      "Those are invalid coordinates. Please try again:\n" +
-      "> "
+      puts "Those are invalid coordinates. Please try again:\n"
+      puts "> "
       coords = gets.chomp.upcase.to_a
     end
       @player_board.place(@margot, coords)
-    @player_board.render
-    "Enter the squares for Sheila (3 spaces)\n" +
-    "> "
+    puts "Enter the squares for Sheila (3 spaces)\n"
+    puts "> "
     coords_2 = gets.chomp.upcase.to_a
     until @player_board.valid_placement?(@sheila, coords_2) == true
-      "Those are invalid coordinates. Please try again:\n" +
-      "> "
+      puts "Those are invalid coordinates. Please try again:\n"
+      puts "> "
       coords_2 = gets.chomp.upcase.to_a
     end
-    require 'pry'; binding.pry
       @player_board.place(@sheila, coords_2)
     end
-    @player_board.render
   end
 
   def bombs_away

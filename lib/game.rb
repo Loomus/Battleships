@@ -32,7 +32,8 @@ class Game
   def setup_the_game
     @computer.setup_boards
     @player.show_board
-    # @player.place_ships(@sheila, @coordinate)
+    # require 'pry'; binding.pry
+    @player.place_ships
     # @player.place_ships(@toto, @coordinate)
     # @player_board.render(true)
   end
