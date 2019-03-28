@@ -1,13 +1,19 @@
 require_relative './board'
 require_relative './ship'
 require_relative './cell'
+require_relative './computer'
+require_relative './player'
 
 class Game
   def initialize
+    @computer_board = Board.new
     @player_board = Board.new
-    @comp_board = Board.new
+    @computer = Computer.new(@computer_board, @player_board)
+    @player = Player.new(@player_board, @computer_board)
     @sheila = Ship.new("Sheila", 3)
-    @toto = Ship.new("Toto",  2)
+    @margot = Ship.new("Margot",  2)
+    @leslie = Ship.new("Leslie", 3)
+    @mildred = Ship.new("Mildred", 2)
     @cells_taken = []
   end
 
@@ -17,75 +23,20 @@ class Game
     print "> "
     answer = gets.chomp
     if answer == "p"
-      setup_boards
+      setup_the_game
     else answer == "q"
       main_menu
     end
   end
 
-  def find_empty_cell
-    coord = @comp_board.cells.find do |key, value|
-      return key if value.empty?
-    end
+  def setup_the_game
+    @computer.setup_boards
+    @player.show_board
+    # @player.place_ships(@sheila, @coordinate)
+    # @player.place_ships(@toto, @coordinate)
+    # @player_board.render(true)
   end
-
-  def setup_boards
-    # add @sheila
-    empty_cell = find_empty_cell
-    place_comp_piece(empty_cell, @sheila)
-
-    # add @toto
-    empty_cell = find_empty_cell
-    place_comp_piece(empty_cell, @toto)
-  end
-
-  def place_comp_piece(empty_cell, ship)
-
-    split_cell = empty_cell.split('').to_a
-    coordinates = build_row(split_cell[0], split_cell[1].to_i, split_cell[1].to_i + ship.length)
-    if @comp_board.valid_coordinates?(coordinates)
-      @comp_board.place(ship, coordinates)
-      return true
-    else
-      coordinates = build_column(split_cell[1], split_cell[0].ord, split_cell[0].ord + ship.length)
-      if @comp_board.valid_coordinates?(coordinates)
-        @comp_board.place(ship, coordinates)
-        return true
-      end
-    end
-    return false
-  end
-
-  def build_row(x_coord, y_index, y_max)
-    coords = []
-    while y_index < y_max
-      coords << x_coord + y_index.to_s
-      y_index += 1
-    end
-    return coords
-  end
-
-  def build_column(y_coord, x_index, x_max)
-    coords = []
-    while x_index < x_max
-      coords << x_index.chr + y_coord
-      x_index += 1
-    end
-    return coords
-  end
-
-
-
-  require 'pry'; binding.pry
-    # build_row(x_coord, y_index, max)
-    #
-    #
-    # @comp_board.place(@sheila, empty_cell)
-    # @cells.keys.each_slice(4).to_a
-    # @comp_board.render
-    # @comp_board.cells.keys.sample = random_coord
-    # until @comp_board.valid_placement? == true
-    # "I have laid out my ships on the grid."
 end
 @game = Game.new
-@game.main_menu
+p @game.main_menu
+p @game.setup_the_game

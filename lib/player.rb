@@ -1,8 +1,13 @@
-class Player
-  attr_reader :player_board
+require_relative './board'
+require_relative './ship'
+require_relative './cell'
+require_relative './computer'
 
-  def initialize(player_board)
-    @player_board = Board.new
+class Player
+  attr_reader :player_board, :computer_board
+
+  def initialize(player_board, computer_board)
+    @player_board = player_board
     @computer_board = computer_board
     @margot = Ship.new("Margot", 2)
     @sheila = Ship.new("Sheila", 3)
@@ -14,7 +19,7 @@ class Player
     @player_board.render(true)
   end
 
-  def place_ships(ship, coordinate)
+  def place_ships(ship, coords)
     "I have laid out my ships on the grid.\n" +
     "You now need to lay out your two ships.\n" +
     "Margot, our cruiser, is 2 units long and Sheila, our steely submarine, is 3 units long.\n" +
@@ -25,7 +30,7 @@ class Player
     "D . . . .\n" +
     "Enter the squares for Margot (3 spaces):\n" +
     "> "
-    coords = gets.chomp.upcase.to_a
+    coords = gets.chomp.upcase
     until @player_board.valid_placement?(@margot, coords) == true
       "Those are invalid coordinates. Please try again:\n" +
       "> "
@@ -41,6 +46,7 @@ class Player
       "> "
       coords_2 = gets.chomp.upcase.to_a
     end
+    require 'pry'; binding.pry
       @player_board.place(@sheila, coords_2)
     end
     @player_board.render
