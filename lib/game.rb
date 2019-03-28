@@ -32,12 +32,12 @@ class Game
   def setup_the_game
     @computer.setup_boards
     @player.show_board
-    # require 'pry'; binding.pry
     @player.place_ships
-    # @player.place_ships(@toto, @coordinate)
-    # @player_board.render(true)
+  end
+
+  def turn
+    @computer_board.render
+    @player_board.render(true)
+    @player.bombs_away
   end
 end
-@game = Game.new
-p @game.main_menu
-p @game.setup_the_game

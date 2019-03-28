@@ -9,8 +9,8 @@ class Player
   def initialize(player_board, computer_board)
     @player_board = player_board
     @computer_board = computer_board
-    @margot = Ship.new("Margot", 2)
-    @sheila = Ship.new("Sheila", 3)
+    @margot = Ship.new("Margot", 3)
+    @sheila = Ship.new("Sheila", 2)
     @shots = []
   end
 
@@ -30,22 +30,23 @@ class Player
     puts "D . . . .\n"
     puts "Enter the squares for Margot (3 spaces):\n"
     puts "> "
-    coords = gets.chomp.upcase
-    until @player_board.valid_placement?(@margot, coords) == true
+    coordinate = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@margot, coordinate) == true
       puts "Those are invalid coordinates. Please try again:\n"
       puts "> "
-      coords = gets.chomp.upcase.to_a
+      coordinate = gets.chomp.upcase.split
     end
-      @player_board.place(@margot, coords)
-    puts "Enter the squares for Sheila (3 spaces)\n"
+      @player_board.place(@margot, coordinate)
+    puts "Enter the squares for Sheila (2 spaces)\n"
     puts "> "
-    coords_2 = gets.chomp.upcase.to_a
-    until @player_board.valid_placement?(@sheila, coords_2) == true
+    coordinate = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@sheila, coordinate) == true
       puts "Those are invalid coordinates. Please try again:\n"
       puts "> "
-      coords_2 = gets.chomp.upcase.to_a
+      coordinate = gets.chomp.upcase.split
     end
-      @player_board.place(@sheila, coords_2)
+      @player_board.place(@sheila, coordinate)
+      @player_board.render(true)
     end
   end
 
